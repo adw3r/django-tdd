@@ -16,7 +16,6 @@ class NewVisitorTest(unittest.TestCase):
         self.driver.quit()
 
     def test_can_start_a_list_and_retrieve_it_later(self):
-        self.skipTest('not implemented!')
         self.driver.get('http://localhost:8000')
         self.assertTrue('To-Do' in self.driver.title)
         header_text = self.driver.find_element(By.TAG_NAME, 'h1').text
