@@ -13,12 +13,9 @@ class TestUI(unittest.TestCase):
     def tearDown(self) -> None:
         self.driver.quit()
 
-    def test_getindex(self):
-        self.skipTest('Test get root is not implemented')
+    def test_get_index(self):
         self.driver.get('http://localhost:8000')
-        self.assertTrue('To-do' in self.driver.page_source)
-
-        self.fail('End of test!')
+        self.assertTrue('To-Do' in self.driver.title)
 
 
 if __name__ == '__main__':
