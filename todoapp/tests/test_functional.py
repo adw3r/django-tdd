@@ -15,4 +15,10 @@ class TestUI(unittest.TestCase):
 
     def test_getindex(self):
         self.driver.get('http://localhost:8000')
-        self.assertTrue('Django' in self.driver.page_source)
+        self.assertTrue('To-do' in self.driver.page_source)
+
+        self.fail('End of test!')
+
+
+if __name__ == '__main__':
+    unittest.main()
