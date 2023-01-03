@@ -15,6 +15,14 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self) -> None:
         self.driver.quit()
 
+    def check_for_row_in_table(self, row_text):
+        table = self.driver.find_element(By.ID, 'id_list_table')
+        rows = table.find_elements(By.TAG_NAME, 'tr')
+        self.assertIn(
+            row_text,
+            [row.text for row in rows]
+        )
+
     def test_can_start_a_list_and_retrieve_it_later(self):
         self.driver.get('http://localhost:8000')
         todo_in_title = 'To-Do' in self.driver.title
@@ -26,20 +34,17 @@ class NewVisitorTest(unittest.TestCase):
             inputbox.get_attribute('placeholder'),
             'Enter a to-do item'
         )
-        inputbox.send_keys('Купить мясо')
+        inputbox.send_keys('1: Купить мясо')
         inputbox.send_keys(Keys.ENTER)
         sleep(1)
 
-        table = self.driver.find_element(By.ID, 'id_list_table')
-        rows = table.find_elements(By.TAG_NAME, 'tr')
-        self.assertTrue(
-            any(row.text == '1: Купить мясо' for row in rows),
-            f'Current is {table.text}'
-        )
+        self.check_for_row_in_table('1: Купить мясо')
 
-        inputbox.send_keys('Сделать мушку из павлиньих перьев')
+        inputbox.send_keys('2: Сделать мушку из павлиньих перьев')
         inputbox.send_keys(Keys.ENTER)
-        sleep(10)
+        sleep(1)
+        self.check_for_row_in_table('1: Купить мясо')
+        self.check_for_row_in_table('2: Сделать мушку из павлиньих перьев')
 
         table = self.driver.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
