@@ -7,6 +7,18 @@ from lists.models import Item
 
 
 class HomePageTest(TestCase):
+    def test_display_all_items(self):
+        item_1_text = 'Item 1'
+        item_2_text = 'Item 2'
+
+        Item.objects.create(text=item_1_text)
+        Item.objects.create(text=item_2_text)
+
+        response = self.client.get('/')
+
+        self.assertIn(item_1_text, response.content.decode())
+        self.assertIn(item_2_text, response.content.decode())
+
 
     def test_can_save_POST_request(self):
         text = 'A new list item'

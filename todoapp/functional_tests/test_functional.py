@@ -34,16 +34,15 @@ class NewVisitorTest(unittest.TestCase):
             inputbox.get_attribute('placeholder'),
             'Enter a to-do item'
         )
-        inputbox.send_keys('1: Купить мясо')
+        inputbox.send_keys('Купить мясо')
         inputbox.send_keys(Keys.ENTER)
         sleep(1)
 
         self.check_for_row_in_table('1: Купить мясо')
 
-        inputbox.send_keys('2: Сделать мушку из павлиньих перьев')
+        inputbox.send_keys('Сделать мушку из павлиньих перьев')
         inputbox.send_keys(Keys.ENTER)
         sleep(1)
-        self.check_for_row_in_table('1: Купить мясо')
         self.check_for_row_in_table('2: Сделать мушку из павлиньих перьев')
 
         table = self.driver.find_element(By.ID, 'id_list_table')
