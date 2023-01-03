@@ -37,7 +37,7 @@ class NewVisitorTest(unittest.TestCase):
 
         inputbox.send_keys('Сделать мушку из павлиньих перьев')
         inputbox.send_keys(Keys.ENTER)
-        sleep(1)
+        sleep(10)
 
         table = self.driver.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
