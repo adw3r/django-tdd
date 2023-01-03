@@ -17,7 +17,8 @@ class NewVisitorTest(unittest.TestCase):
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         self.driver.get('http://localhost:8000')
-        self.assertTrue('To-Do' in self.driver.title)
+        todo_in_title = 'To-Do' in self.driver.title
+        self.assertTrue(todo_in_title)
         header_text = self.driver.find_element(By.TAG_NAME, 'h1').text
         self.assertIn('To-Do', header_text)
         inputbox = self.driver.find_element(By.ID, 'id_new_item')
@@ -32,7 +33,8 @@ class NewVisitorTest(unittest.TestCase):
         table = self.driver.find_element(By.ID, 'id_list_table')
         rows = table.find_elements(By.TAG_NAME, 'tr')
         self.assertTrue(
-            any(row.text == '1: Купить мясо' for row in rows)
+            any(row.text == '1: Купить мясо' for row in rows),
+            f'Current is {table.text}'
         )
 
         inputbox.send_keys('Сделать мушку из павлиньих перьев')
